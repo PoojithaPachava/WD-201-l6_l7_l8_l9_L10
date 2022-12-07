@@ -1,7 +1,8 @@
 body {
-  background-color: rgb(240, 245, 248);
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
-.Todo-Item:hover .trash-icon{
-  display:block;
-}
+  font-family:'Times New Roman', Times, serif;
+  background: skyblue;
+  }
+  
+  .Todo-Item:hover .trash-icon{
+    display:block;
+  }
