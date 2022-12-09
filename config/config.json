@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "postgres",
-    "password": "root",
-    "database": "dwd lev 7",
+    "password": "poojitha",
+    "database": "wd lev 7",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "root",
+    "password": "poojitha",
     "database": "wd lev 7",
     "host": "127.0.0.1",
     "dialect": "postgres"
