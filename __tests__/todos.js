@@ -80,7 +80,7 @@ describe("Todo test suite ", () => {
     res = await agent.get("/");
     csrfToken = extractCsrfToken(res);
 
-    const response = await agent.put(`todos/${latestTodo.id}`).send({
+    const response = await agent.put(`/todos/${latestTodo.id}`).send({
       _csrf: csrfToken,
     });
     const parsedUpdateResponse = JSON.parse(response.text);
