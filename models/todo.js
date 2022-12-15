@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     static async completedItemsAre() {
       return this.findAll({
-        where: { completed: { [Op.eq]: true } },
+        where: { completed: true },
         order: [["id", "DESC"]],
       });
     }
