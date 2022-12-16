@@ -11,19 +11,57 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-    static addaTodo({ title, dueDate }) {
+    static addTodo({ title, dueDate }) {
       return this.create({ title: title, dueDate: dueDate, completed: false });
     }
-    // static markAsCompleted() {
-    //   return this.update({ completed: true });
-    // }
-    static getAllTodos() {
+    markAsCompleted() {
+      return this.update({ completed: true });
+    }
+    deletetodo() {
+      return this.removetask(id);
+    }
+    static getTodos() {
       return this.findAll({ order: [["id", "ASC"]] });
     }
-    static async completedItemsAre() {
+    static overdue() {
       return this.findAll({
-        where: { completed: true },
-        order: [["id", "DESC"]],
+        where: {
+          dueDate: {
+            [Op.lt]: new Date().toLocaleDateString("en-CA"),
+          },
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
+    static dueToday() {
+      return this.findAll({
+        where: {
+          dueDate: {
+            [Op.eq]: new Date().toLocaleDateString("en-CA"),
+          },
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
+    static dueLater() {
+      return this.findAll({
+        where: {
+          dueDate: {
+            [Op.gt]: new Date().toLocaleDateString("en-CA"),
+          },
+          completed: false,
+        },
+        order: [["id", "ASC"]],
+      });
+    }
+    static completedItems() {
+      return this.findAll({
+        where: {
+          completed: true,
+        },
+        order: [["id", "ASC"]],
       });
     }
     static async remove(id) {
@@ -35,39 +73,6 @@ module.exports = (sequelize, DataTypes) => {
     }
     setCompletionStatus(bool) {
       return this.update({ completed: bool });
-    }
-    static async overdue() {
-      return this.findAll({
-        where: {
-          dueDate: {
-            [Op.lt]: new Date().toLocaleDateString("en-CA"),
-          },
-          completed: false,
-        },
-        order: [["id", "ASC"]],
-      });
-    }
-    static async dueToday() {
-      return this.findAll({
-        where: {
-          dueDate: {
-            [Op.eq]: new Date().toLocaleDateString("en-CA"),
-          },
-          completed: false,
-        },
-        order: [["id", "ASC"]],
-      });
-    }
-    static async dueLater() {
-      return this.findAll({
-        where: {
-          dueDate: {
-            [Op.gt]: new Date().toLocaleDateString("en-CA"),
-          },
-          completed: false,
-        },
-        order: [["id", "ASC"]],
-      });
     }
   }
 
