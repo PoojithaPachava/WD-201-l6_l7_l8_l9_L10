@@ -15,12 +15,20 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static async addaTodo({ title, dueDate, userID }) {
+    static addTodo({ title, dueDate, userID }) {
       return this.create({
         title: title,
         dueDate: dueDate,
         completed: false,
         userID,
+      });
+    }
+
+    static getTodos(userID) {
+      return this.findAll({
+        where: {
+          userID,
+        },
       });
     }
 
@@ -50,15 +58,6 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static async completedItemsAre(userID) {
-      return await Todo.findAll({
-        where: {
-          completed: true,
-          userID,
-        },
-      });
-    }
-
     static async dueLater(userID) {
       return await Todo.findAll({
         where: {
@@ -72,7 +71,14 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    
+    static async completedItems(userID) {
+      return await Todo.findAll({
+        where: {
+          completed: true,
+          userID,
+        },
+      });
+    }
 
     static async remove(id, userID) {
       return this.destroy({
@@ -83,19 +89,10 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static async getTodos(userID) {
-      return this.findAll({
-        where: {
-          userID,
-        },
-      });
-    }
-
-  setCompletionStatusAs(status) {
-      return this.update({ completed: status });
+    setCompletionStatus(state) {
+      return this.update({ completed: state });
     }
   }
-  
   Todo.init(
     {
       title: {
