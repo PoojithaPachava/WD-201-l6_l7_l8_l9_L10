@@ -24,6 +24,11 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.removeColumn("Todos", "userID");
-    
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   },
 };
